@@ -12,16 +12,37 @@
         svg {
             display: block;
         }
-        html, body, svg {
+        html, body {
             margin: 0px;
             padding: 0px;
-            height: 100%;
+            height: 90%;
             width: 100%;
         }
+        h1{
+            height: 5%
+        }
+
+        #footer p {
+            margin-top: 15px;
+            height: 5%;
+            margin-bottom: 0;
+            font-size: 10px;
+            line-height: 14px;
+            color: gray;
+        }
+
+        #footer p a {
+            color: gray;
+        }
+
     </style>
 </head>
 <body>
+<h1>Embedded SVG</h1>
 <svg id='chart1'></svg>
+<div id="footer">
+    <p><strong>Source:</strong> Data was derived from something. See the &rdquo;<a href="https://www.anl.gov/energy-systems/project/light-duty-electric-drive-vehicles-monthly-sales-updates">Light Duty Electric Drive Vehicles Monthly Sales Updates</a>&ldquo; foo. Blah Blah.</p>
+</div>
 <script>
     d3.json('config.json', function(config) {
         d3.csv(config.dataFilePathWeeklyFoodSales, function (data) {
@@ -70,7 +91,7 @@
                     return d3.time.format('%x')(new Date(d))
                 });
                 chart.yAxis.tickFormat(function(d) { return '$' + d3.format(',.0f')(d); });
-                // chart.y2Axis.tickFormat(d3.format(',.0f'));
+
                 chart.legend.vers('classic');
 
                 d3.select('#chart1')
