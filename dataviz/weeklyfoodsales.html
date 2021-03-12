@@ -1,31 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset='utf-8'>
+    <title>US Weekly Retail Food Sales by Category</title>
+    <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css" rel="stylesheet" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.js"></script>
-    <style>
-        svg {
-            display: block;
-        }
-
-        html, body {
-            font: 9px sans-serif;
-            height: 90%;
-            width: 99%;
-            padding-left: 5px;
-            padding-right: 5px;
-        }
-
-        #footer p {
-            font: 12px sans-serif;
-            height: 5%;
-            line-height: 12px;
-            margin-top: 17px;
-        }
-
-    </style>
 </head>
 <body>
     <h1>US Weekly Retail Food Sales by Category</h1>
@@ -38,19 +19,32 @@
             d3.csv(config.dataFilePathWeeklyFoodSales, function (data) {
                 var loadData = [];
                 var columnNames = Object.keys(data[0])
-                for (var i = 1; i < columnNames.length; i++) {
+                for (var i = 1; i < columnNames.length; ++i) {
                     var stackItem = {};
                     stackItem['key'] = columnNames[i];
                     stackItem['values'] = [];
                     loadData.push(stackItem);
                 }
 
-                for (i = 0; i < data.length; i++) {
-                    for (var j = 0; j < loadData.length; j++) {
+                for (i = 0; i < data.length; ++i) {
+                    for (var j = 0; j < loadData.length; ++j) {
                         loadData[j]['values'].push([
                             parseInt(data[i].Epoch),
                             parseInt(data[i][loadData[j]['key']])
                         ]);
+                    }
+                }
+
+                var epochMin = loadData[0]['values'][0][0];
+                var epochMax = loadData[0]['values'][loadData[0]['values'].length - 1][0]
+                var dateMinOffset = 1 / 6;
+                var dateRangeMillis = epochMax - epochMin;
+                var dateRangeOffsetMillis = dateRangeMillis * dateMinOffset;
+                var startingPoint = epochMin + dateRangeOffsetMillis;
+                for (i = 1; i < loadData[0]['values'].length; ++i) {
+                    if(startingPoint < loadData[0]['values'][i][0]) {
+                        epochMin = loadData[0]['values'][i-1][0];
+                        break;
                     }
                 }
 
@@ -70,8 +64,8 @@
                         .duration(0);
 
                     chart.brushExtent([
-                        loadData[0]['values'][0][0],
-                        loadData[0]['values'][loadData[0]['values'].length - 1][0]
+                        epochMin,
+                        epochMax
                     ]);
 
                     chart.xAxis.tickFormat(function (d) {
