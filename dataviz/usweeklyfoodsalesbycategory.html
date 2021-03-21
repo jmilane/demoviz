@@ -16,7 +16,7 @@
     </div>
     <script>
         d3.json('config.json', function(config) {
-            d3.csv(config.dataFilePathWeeklyFoodSales, function (data) {
+            d3.csv(config.pathUsWeeklyFoodSalesByCategory, function (data) {
                 var loadData = [];
                 var columnNames = Object.keys(data[0])
                 for (var i = 1; i < columnNames.length; ++i) {
