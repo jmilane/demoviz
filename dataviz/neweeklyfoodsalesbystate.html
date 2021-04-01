@@ -14,6 +14,11 @@
     <div id="footer">
         <p><strong>Source:</strong> Data is derived from data available in the <a href="https://www.ers.usda.gov/data-products/weekly-retail-food-sales">USDA Economic Research Service’s Weekly Retail Food Sales</a> series. Please send any questions to <strong>info@parallaxdatasolutions.com</strong>.</p>
     </div>
-    <script src="js/neweeklyfoodsalesbystate.js"></script>
+    <script src="js/stackedAreaDateXaxisDollarsYaxis.js"></script>
+    <script>
+        d3.json('config.json', function(config) {
+            stackedAreaDateXaxisDollarsYaxis(config, 'pathNeWeeklyFoodSalesByState');
+        });
+    </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
-d3.json('config.json', function(config) {
-    d3.csv(config.pathUsWeeklyFoodSalesByCategory, function (data) {
+function stackedAreaDateXaxisDollarsYaxis(config, path) {
+    d3.csv(config[path], function (data) {
         var loadData = [];
         var columnNames = Object.keys(data[0])
         for (var i = 1; i < columnNames.length; ++i) {
@@ -31,10 +31,11 @@ d3.json('config.json', function(config) {
             }
         }
 
+        var colorRange = (10 >= loadData.length) ? d3.scale.category10().range() : d3.scale.category20().range();
         var chart;
         nv.addGraph(function () {
             chart = nv.models.stackedAreaWithFocusChart()
-                .color(nv.utils.getColor(d3.scale.category20().range()))
+                .color(nv.utils.getColor(colorRange))
                 .useInteractiveGuideline(false)
                 .margin({ left: 100, right: 40 })
                 .x(function (d) {
@@ -72,4 +73,4 @@ d3.json('config.json', function(config) {
             return chart;
         });
     });
-});
+}
