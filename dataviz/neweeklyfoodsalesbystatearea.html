@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
+    <title>Weekly Retail Food Sales by State - New England</title>
     <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css" rel="stylesheet" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" charset="utf-8"></script>
@@ -13,10 +14,10 @@
     <div id="footer">
         <p><strong>Source:</strong> Data is derived from data available in the <a href="https://www.ers.usda.gov/data-products/weekly-retail-food-sales">USDA Economic Research Service’s Weekly Retail Food Sales</a> series. Please send any questions to <strong>info@parallaxdatasolutions.com</strong>.</p>
     </div>
-    <script src="js/multiBarDateXaxisDollarsYaxis.js"></script>
+    <script src="js/stackedAreaDateXaxisDollarsYaxis.js"></script>
     <script>
         d3.json('config.json', function(config) {
-            multiBarDateXaxisDollarsYaxis(config, 'pathNeWeeklyFoodSalesByState');
+            stackedAreaDateXaxisDollarsYaxis(config, 'pathNeWeeklyFoodSalesByStateArea');
         });
     </script>
 </body>
