@@ -1,4 +1,4 @@
-function stackedAreaDateXaxisDollarsYaxis(config, path) {
+function stackedAreaDateXaxisDollarsYaxis(config, path, callback) {
     d3.csv(config[path], function (data) {
         var loadData = [];
         var columnNames = Object.keys(data[0])
@@ -72,5 +72,7 @@ function stackedAreaDateXaxisDollarsYaxis(config, path) {
             nv.utils.windowResize(chart.update);
             return chart;
         });
+
+        callback();
     });
 }

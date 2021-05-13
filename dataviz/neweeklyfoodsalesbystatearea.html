@@ -12,12 +12,14 @@
     <h1>Weekly Retail Food Sales by State - New England</h1>
     <svg id='chart1'></svg>
     <div id="footer">
-        <p><strong>Source:</strong> Data is derived from data available in the <a href="https://www.ers.usda.gov/data-products/weekly-retail-food-sales">USDA Economic Research Service’s Weekly Retail Food Sales</a> series. Please send any questions to <strong>info@parallaxdatasolutions.com</strong>.</p>
+        <p id="p1"></p>
     </div>
     <script src="js/stackedAreaDateXaxisDollarsYaxis.js"></script>
     <script>
         d3.json('config.json', function(config) {
-            stackedAreaDateXaxisDollarsYaxis(config, 'pathNeWeeklyFoodSalesByStateArea');
+            stackedAreaDateXaxisDollarsYaxis(config, 'pathNeWeeklyFoodSalesByStateArea', function callFunction() {
+                document.getElementById("p1").innerHTML = "<strong>Source:</strong> Data is derived from data available in the <a href=\"https://www.ers.usda.gov/data-products/weekly-retail-food-sales\">USDA Economic Research Service’s Weekly Retail Food Sales</a> series. Please send any questions to <strong>info@parallaxdatasolutions.com</strong>.";
+            });
         });
     </script>
 </body>
