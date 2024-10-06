@@ -31,7 +31,7 @@ function stackedAreaDateXaxisDollarsYaxis(config, path, callback) {
             }
         }
 
-        var colorRange = (10 >= loadData.length) ? d3.scale.category10().range() : d3.scale.category20().range();
+        var colorRange = (10 <= loadData.length) ? d3.scale.category10().range() : d3.scale.category20().range();
         var chart;
         nv.addGraph(function () {
             chart = nv.models.stackedAreaWithFocusChart()

@@ -29,19 +29,19 @@ function stackedAreaMonthXaxisCountYaxis(config, path, callback) {
         var dateRangeOffsetMillis = dateRangeMillis * dateMinOffset;
         var startingPoint = epochMin + dateRangeOffsetMillis;
         for (i = 1; i < loadData[0]['values'].length; ++i) {
-            if(startingPoint < loadData[0]['values'][i][0]) {
-                epochMin = loadData[0]['values'][i-1][0];
+            if (startingPoint < loadData[0]['values'][i][0]) {
+                epochMin = loadData[0]['values'][i - 1][0];
                 break;
             }
         }
 
-        var colorRange = (10 >= loadData.length) ? d3.scale.category10().range() : d3.scale.category20().range();
+        var colorRange = (10 <= loadData.length) ? d3.scale.category10().range() : d3.scale.category20().range();
         var chart;
         nv.addGraph(function () {
             chart = nv.models.stackedAreaWithFocusChart()
                 .color(nv.utils.getColor(colorRange))
                 .useInteractiveGuideline(false)
-                .margin({ left: 100, right: 40 })
+                .margin({ left: 100, right: 40 }) // Keep left margin at 100
                 .x(function (d) {
                     return d[0]
                 })
@@ -62,9 +62,11 @@ function stackedAreaMonthXaxisCountYaxis(config, path, callback) {
             chart.x2Axis.tickFormat(function (d) {
                 return d3.time.format('%b %Y')(new Date(d))
             });
-            chart.yAxis.tickFormat(function(d) { return d3.format(',.0f')(d); });
 
-            chart.legend.vers('classic');
+            // Simple vertical label with axisLabelDistance set
+            chart.yAxis
+                .tickFormat(function (d) { return d3.format(',.0f')(d); })
+                .axisLabel("Count of Clinical Trials (A Trial May Study Multiple Conditions)");
 
             d3.select('#chart1')
                 .datum(loadData)
