@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <title>Clinical Trial Conditions Draft</title>
+    <link href="../style.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.js"></script>
+</head>
+<body>
+    <h1>Clinical Trial Conditions Draft</h1>
+    <svg id='chart1'></svg>
+    <div id="footer">
+        <p id="p1"></p>
+    </div>
+    <script src="js/stackedAreaMonthXaxisCountYaxis.js"></script>
+    <script>
+        d3.json('config.json', function(config) {
+            stackedAreaMonthXaxisCountYaxis(config, 'pathClinicalTrialConditions', function callFunction() {
+                document.getElementById("p1").innerHTML = "<strong>Source:</strong> Data is derived from data available in the <a href=\"https://clinicaltrials.gov/data-api/api\">ClinicalTrials.gov API</a>. Please send any questions to <strong>info@parallaxdatasolutions.com</strong>.";
+            });
+        });
+    </script>
+</body>
+</html>
