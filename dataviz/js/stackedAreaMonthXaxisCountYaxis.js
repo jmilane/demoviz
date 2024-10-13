@@ -66,7 +66,7 @@ function stackedAreaMonthXaxisCountYaxis(config, path, callback) {
             // Simple vertical label with axisLabelDistance set
             chart.yAxis
                 .tickFormat(function (d) { return d3.format(',.0f')(d); })
-                .axisLabel("Count of Clinical Trials (A Trial May Study Multiple Conditions)");
+                .axisLabel("Count of Clinical Trials Studying Each Condition");
 
             d3.select('#chart1')
                 .datum(loadData)

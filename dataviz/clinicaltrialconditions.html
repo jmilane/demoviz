@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset='utf-8'>
-    <title>Top 20 Conditions Investigated in Clinical Studies Reported by ClinicalTrials.gov</title>
+    <title>20 Most Frequently Investigated Conditions in ClinicalTrials.gov Studies</title>
     <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css" rel="stylesheet" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.js"></script>
 </head>
 <body>
-    <h1>Top 20 Conditions Investigated in Clinical Studies Reported by ClinicalTrials.gov</h1>
+    <h1>20 Most Frequently Investigated Conditions in ClinicalTrials.gov Studies</h1>
+    <h2>One Trial May Investigate Multiple Conditions</h2>
     <svg id='chart1'></svg>
     <div id="footer">
         <p id="p1"></p>
@@ -18,7 +19,7 @@
     <script>
         d3.json('config.json', function(config) {
             stackedAreaMonthXaxisCountYaxis(config, 'pathClinicalTrialConditions', function callFunction() {
-                document.getElementById("p1").innerHTML = "<strong>Source:</strong> Data is derived from data available in the <a href=\"https://clinicaltrials.gov/data-api/api\">ClinicalTrials.gov API</a>. Please send any questions to <strong>info@parallaxdatasolutions.com</strong>.";
+                document.getElementById("p1").innerHTML = "<strong>Source:</strong> Data is derived from the publicly available <a href=\"https://clinicaltrials.gov/data-api/api\">ClinicalTrials.gov API</a> as of October 3, 2024, through September 30, 2024. Inclusion in the 20 most frequently investigated conditions is based on data from 2010 through the most recently reported month. Each condition displayed represents a distinct text label as reported in the source data. No effort has been made to group labels that may refer to the same condition. Please send any questions to <strong>info@parallaxdatasolutions.com</strong>.";
             });
         });
     </script>
